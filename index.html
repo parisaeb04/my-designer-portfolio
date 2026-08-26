@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <link id="favicon" rel="icon" href="image/linkedinHeadshot.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parisa Ebrahemian</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ====== CSS FILES ====== -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Tailwind & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Vanilla Tilt for 3D Interactions -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#a78bfa',
+                            DEFAULT: '#7c3aed',
+                            dark: '#4c1d95',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased selection:bg-brand text-gray-900 bg-slate-50 dark:bg-[#050505] dark:text-gray-200 transition-colors duration-300">
+
+    <!-- HTML STRUCTURE  -->
+    
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <!-- Animated Mesh Background -->
+    <div class="mesh-bg bg-slate-50 dark:bg-[#050505]">
+        <div class="mesh-blob blob-1"></div>
+        <div class="mesh-blob blob-2"></div>
+        <div class="mesh-blob blob-3"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass-card bg-white/70 dark:bg-[#050505]/70 border-b border-gray-200 dark:border-white/10 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="font-display text-2xl font-bold tracking-wider text-gray-900 dark:text-white">
+                    Ebrahemian<span class="text-brand-light">.</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light transition-colors relative group">
+                        Home<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#about" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light transition-colors relative group">
+                        About<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#skills" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light transition-colors relative group">
+                        Skills<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#portfolio" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light transition-colors relative group">
+                        Portfolio<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#experience" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light transition-colors relative group">
+                        Experience<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#contact" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light transition-colors relative group">
+                        Contact<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-light transition-all group-hover:w-full"></span>
+                    </a>
+                    
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" class="p-2 ml-4 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none">
+                        <i class="fas fa-moon text-lg" id="theme-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="flex items-center md:hidden">
+                    <button id="theme-toggle-mobile" class="p-2 mr-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none">
+                        <i class="fas fa-moon text-lg" id="theme-icon-mobile"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-900 dark:text-white focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 space-y-3 border-t border-gray-200 dark:border-white/10 pt-4">
+                <a href="#home" class="block text-gray-700 dark:text-gray-300 hover:text-brand-light transition-colors">Home</a>
+                <a href="#about" class="block text-gray-700 dark:text-gray-300 hover:text-brand-light transition-colors">About</a>
+                <a href="#skills" class="block text-gray-700 dark:text-gray-300 hover:text-brand-light transition-colors">Skills</a>
+                <a href="#portfolio" class="block text-gray-700 dark:text-gray-300 hover:text-brand-light transition-colors">Portfolio</a>
+                <a href="#experience" class="block text-gray-700 dark:text-gray-300 hover:text-brand-light transition-colors">Experience</a>
+                <a href="#contact" class="block text-gray-700 dark:text-gray-300 hover:text-brand-light transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+                
+                <!-- Text Content -->
+                <div class="lg:w-1/2 text-center lg:text-left z-10 reveal active">
+                    <div class="inline-block px-4 py-1.5 rounded-full border border-gray-300 dark:border-white/10 bg-white/50 dark:bg-black/30 backdrop-blur-md text-xs font-semibold tracking-widest uppercase mb-6 text-gray-700 dark:text-gray-300 shadow-sm">
+                        <i class="fa-solid fa-bolt text-yellow-500 mr-2"></i> Available for opportunities
+                    </div>
+                    
+                    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4 text-gray-900 dark:text-white">
+                        Hi, I'm <br/>
+                        <span class="text-gradient">Parisa</span>
+                    </h1>
+                    
+                    <h2 class="text-2xl sm:text-3xl font-medium text-gray-600 dark:text-gray-400 mb-6 h-10">
+                        <span id="typewriter" class="typing-container text-gray-900 dark:text-white"></span>
+                    </h2>
+                    
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        I'm Parisa Ebrahemian, a recent Computer Engineering graduate from Imam Khomeini International University of Qazvin, Iran. Passionate about software development, web technologies, and UI/UX design.
+                    </p>
+                                        
+                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 bg-gray-900 text-white dark:bg-white dark:text-black font-semibold rounded-lg hover:bg-brand-light dark:hover:bg-gray-200 transition-all transform hover:scale-105 shadow-md">
+                            Get In Touch
+                        </a>
+                        <a href="#portfolio" class="w-full sm:w-auto px-8 py-3.5 glass-card bg-white/60 dark:bg-white/5 text-gray-900 dark:text-white font-semibold rounded-lg hover:bg-white/90 dark:hover:bg-white/10 transition-all border border-gray-300 dark:border-white/20 shadow-sm">
+                            View My Work
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-6 mt-12 justify-center lg:justify-start">
+                        <a href="https://github.com/parisaeb04" target="_blank" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transform hover:-translate-y-1 transition-all text-2xl"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/" target="_blank" class="text-gray-500 hover:text-[#0a66c2] dark:text-gray-400 dark:hover:text-[#0a66c2] transform hover:-translate-y-1 transition-all text-2xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://x.com/parparisa9404" target="_blank" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transform hover:-translate-y-1 transition-all text-2xl"><i class="fa-brands fa-x"></i></a>
+                        <a href="https://www.instagram.com/_parisa._.eb/" target="_blank" class="text-gray-500 hover:text-[#e1306c] dark:text-gray-400 dark:hover:text-[#e1306c] transform hover:-translate-y-1 transition-all text-2xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Profile Image -->
+                <div class="lg:w-1/2 flex justify-center z-10 reveal active mt-10 lg:mt-0">
+                    <div class="relative profile-glow">
+                        <div class="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-white/50 dark:border-white/20 bg-white/50 dark:bg-black/50 backdrop-blur-sm relative z-10 p-2 shadow-xl">
+                            <img src="image/LinkedIn_HeadShot.png" alt="Parisa Ebrahemian - Front-End Developer and Designer" class="w-full h-full object-cover rounded-full filter contrast-110">
+                        </div>
+                        
+                        <!-- Floating Badges -->
+                        <div class="absolute -bottom-6 right-0 glass-card bg-white/80 dark:bg-black/60 border border-gray-200 dark:border-white/10 px-4 py-3 rounded-xl z-20 flex items-center gap-3 animate-bounce shadow-lg" style="animation-duration: 3s;">
+                            <i class="fa-solid fa-code text-brand-light text-xl"></i>
+                            <div>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Passionate</p>
+                                <p class="text-sm font-bold text-gray-900 dark:text-white">Designer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white reveal"><span class="text-gradient">About</span> Me</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal relative group rounded-2xl overflow-hidden shadow-xl" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                    <div class="absolute inset-0 border border-white/20 rounded-2xl z-20 pointer-events-none"></div>
+                     <img src="image/Portfolio_cover.jpg" alt="Parisa Ebrahemian coding and working on ui/ux projects" class="w-full max-w-md mx-auto rounded-2xl filter brightness-100 dark:brightness-90 group-hover:brightness-100 transition-all duration-500 transform group-hover:scale-105">
+                </div>
+                
+                <div class="reveal glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 p-8 rounded-3xl shadow-lg dark:shadow-none">
+                    <h3 class="font-display text-2xl font-bold mb-6 text-gray-900 dark:text-white">A Passionate Tech Enthusiast</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed text-lg font-light">
+                         I am a final-year undergraduate student in Computer Engineering - Software at Imam Khomeini International University of Qazvin. With a deep passion for software development, problem-solving, and innovative technologies.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed text-lg font-light">
+                        My academic journey has equipped me with strong foundations in software engineering, algorithms, system design, and database. I am always eager to learn new technologies and collaborate on meaningful projects that make a real impact.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mt-4">
+                        <!-- UI Design -->
+                        <div class="glass-card bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-gray-100 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none">
+                            <i class="fas fa-palette text-brand-light text-3xl mb-3"></i>
+                            <p class="font-bold text-sm text-gray-900 dark:text-white tracking-wide">UI Design</p>
+                        </div>
+                        
+                        <!-- UX Design -->
+                        <div class="glass-card bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-gray-100 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none">
+                            <i class="fas fa-users text-blue-500 dark:text-blue-400 text-3xl mb-3"></i>
+                            <p class="font-bold text-sm text-gray-900 dark:text-white tracking-wide">UX Design</p>
+                        </div>
+                        
+                        <!-- Front-End Development -->
+                        <div class="glass-card bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-white/10 p-4 rounded-xl flex flex-col items-center justify-center text-center hover:bg-gray-100 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none">
+                            <i class="fas fa-code text-pink-500 dark:text-pink-400 text-3xl mb-3"></i>
+                            <p class="font-bold text-sm text-gray-900 dark:text-white tracking-wide">Front-End Dev</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white reveal">My <span class="text-gradient">Skills</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Technical Stack -->
+                <div class="reveal glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 p-8 rounded-3xl shadow-lg dark:shadow-none">
+                    <h3 class="font-display text-2xl font-bold mb-8 text-gray-900 dark:text-white flex items-center"><i class="fa-solid fa-laptop-code mr-3 text-brand-light"></i> Technical Stack</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-copyright text-3xl text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">C</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-code text-3xl text-blue-600 dark:text-blue-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">C++</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-java text-3xl text-orange-600 dark:text-orange-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Java</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-python text-3xl text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Python</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-js text-3xl text-yellow-400 dark:text-yellow-300 group-hover:text-yellow-500 dark:group-hover:text-yellow-200 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">JavaScript</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-html5 text-3xl text-orange-600 dark:text-orange-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">HTML/CSS</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-css3-alt text-3xl text-teal-500 dark:text-teal-400 group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Tailwind CSS</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-database text-3xl text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">MySQL</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-microchip text-3xl text-cyan-500 dark:text-cyan-400 group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">VHDL</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Engineering -->
+                <div class="reveal glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 p-8 rounded-3xl shadow-lg dark:shadow-none">
+                    <h3 class="font-display text-2xl font-bold mb-8 text-gray-900 dark:text-white flex items-center"><i class="fa-solid fa-toolbox mr-3 text-pink-500 dark:text-pink-400"></i> Tools & Engineering</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-github text-3xl text-gray-800 dark:text-white group-hover:text-brand-light transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Git & GitHub</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-brands fa-android text-3xl text-green-500 dark:text-green-400 group-hover:text-green-600 dark:group-hover:text-green-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Android Studio</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-bolt text-3xl text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-600 dark:group-hover:text-yellow-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Basic Circuits</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fas fa-pen-nib text-3xl text-pink-500 dark:text-pink-400 group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">UI/UX Design</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-palette text-3xl text-red-500 dark:text-red-400 group-hover:text-red-600 dark:group-hover:text-red-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Graphic Design</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-code text-3xl text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">CodeVision AVR</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-microchip text-3xl text-teal-500 dark:text-teal-400 group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Arduino</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-display text-3xl text-indigo-800 dark:text-indigo-800 group-hover:text-indigo-700 dark:group-hover:text-indigo-700 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Proteus</p>
+                        </div>
+                        <div class="bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-center hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm dark:shadow-none group cursor-pointer">
+                            <i class="fa-solid fa-network-wired text-3xl text-purple-500 dark:text-purple-400 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors mb-2"></i>
+                            <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Packet Tracer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">My <span class="text-gradient">Projects</span></h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">A collection of my work across UI/UX design, web development, and hardware simulation.</p>
+            </div>
+            
+           <!-- Filters -->
+            <!-- Filters -->
+            <div class="flex justify-center mb-12 flex-wrap gap-3 reveal">
+                <button class="filter-btn active bg-gray-900 text-white dark:bg-white dark:text-black font-semibold px-6 py-2 rounded-full text-sm transition-all shadow-md dark:shadow-[0_0_15px_rgba(255,255,255,0.3)]" data-filter="all">All</button>
+                <button class="filter-btn glass-card bg-white/60 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full text-sm transition-all shadow-sm dark:shadow-none" data-filter="designs">Designs</button>
+                <button class="filter-btn glass-card bg-white/60 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full text-sm transition-all shadow-sm dark:shadow-none" data-filter="web">Web Development</button>
+                <button class="filter-btn glass-card bg-white/60 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full text-sm transition-all shadow-sm dark:shadow-none" data-filter="hardware">Hardware Simulation</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+
+                <!-- Fitness App 1 -Modern Style -->
+                <div class="project-card reveal" data-category="designs" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <a href="https://www.figma.com/design/rwqxou9S6iYSeBI0CM06rc/Fitness-App?node-id=0-1&t=l9CoWswKZG8cRH6L-1" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/01.jpg" loading="lazy" alt="Fitness App Modern UI Design" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-brand-600 dark:text-brand-light shadow-sm">Design</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-light transition-colors">Fitness App - Modern Style</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Designed a sleek fitness app with neon accents, glassmorphism cards, and high-contrast typography. Focused on creating an energetic and modern user experience with clear visual hierarchy and intuitive navigation.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>View on Figma</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-brand-600 dark:group-hover:text-white transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Fitness App 2 - Clean Pastel Dashboard -->
+                <div class="project-card reveal" data-category="designs" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="transition-delay: 100ms;">
+                    <div class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/03.png" loading="lazy" alt="Fitness App Clean Pastel Dashboard" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-brand-600 dark:text-brand-light shadow-sm">Design</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-light transition-colors">Fitness App - Clean Pastel Dashboard</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Designed a clean and friendly fitness dashboard with a pastel color palette and soft visual elements. Features include step tracking, calorie burn monitoring, heart rate display, weekly activity charts, personalized workout plans, and quick-start workout options. The design uses a light theme with gentle purple and pink accents to create a calming and approachable fitness experience for all users.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>View on Figma</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-brand-600 dark:group-hover:text-white transition-colors"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Music Player - Dark Minimal Style -->
+                <div class="project-card reveal" data-category="designs" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <a href="https://www.figma.com/design/XWCJCCYP5naL36fgVfnJDM/Music-Player-App?node-id=0-1&t=rEu6VZ8PZylkflcx-1" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/music_player.png" loading="lazy" alt="Music Player Dark Minimal UI Design" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-brand-600 dark:text-brand-light shadow-sm">Design</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-light transition-colors">Music Player - Dark Minimal Style</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Designed a dark minimal music player interface with a focus on typography and visual hierarchy. Features include search functionality, popular tracks, playlist collection, and an immersive now-playing screen. The design uses bold typography, subtle glassmorphism, and a moody dark aesthetic to create a modern and engaging music listening experience.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>View on Figma</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-brand-600 dark:group-hover:text-white transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Grocery Shopping App - Clean Style -->
+                <div class="project-card reveal" data-category="designs" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="transition-delay: 100ms;">
+                    <div class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/grocery_shopping.jpg" loading="lazy" alt="Grocery Shopping App UI Design" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-brand-600 dark:text-brand-light shadow-sm">Design</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-light transition-colors">Grocery Shopping App - Clean Style</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Designed a clean and user-friendly grocery shopping app interface. Features include product categories (vegetables, meat, fish), product browsing with prices, shopping list management, order confirmation with shipping status, and order history. The design uses a simple white background with fresh green accents to create a trustworthy and pleasant shopping experience for everyday groceries.s</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>View on Figma</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-brand-600 dark:group-hover:text-white transition-colors"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YouTube Clone - HTML & CSS -->
+                <div class="project-card reveal" data-category="web" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="transition-delay: 200ms;">
+                    <a href="https://github.com/parisaeb04/youtube-simulation" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/YouTube Clone.png" loading="lazy" alt="YouTube Clone HTML CSS Project" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-pink-600 dark:text-pink-400 shadow-sm">Web Development</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">YouTube Clone - HTML & CSS</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Built a static YouTube homepage clone using HTML and CSS. This is my first HTML/CSS project.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>Source Code</span>
+                                <i class="fa-brands fa-github text-gray-500 group-hover:text-pink-600 dark:group-hover:text-white text-lg transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Calculator - HTML, CSS & JavaScript -->
+                <div class="project-card reveal" data-category="web" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="transition-delay: 200ms;">
+                    <a href="https://github.com/parisaeb04/Calculator" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/calculator.png" loading="lazy" alt="Calculator JavaScript Project" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-pink-600 dark:text-pink-400 shadow-sm">Web Development</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Calculator - HTML, CSS & JavaScript</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Built a fully functional calculator using HTML, CSS, and JavaScript.include basic arithmetic operations, decimal input, clear function, and real-time display. This project demonstrates my understanding of DOM manipulation, event handling, and basic JavaScript logic.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>Source Code</span>
+                                <i class="fa-brands fa-github text-gray-500 group-hover:text-pink-600 dark:group-hover:text-white text-lg transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Amazon Clone - HTML, CSS & JavaScript -->
+                <div class="project-card reveal" data-category="web" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <a href="https://github.com/parisaeb04/javascript-amazon-project.git" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/Amazon Clone.png" loading="lazy" alt="Amazon Clone Web Project" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-pink-600 dark:text-pink-400 shadow-sm">Web Development</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Amazon Clone - HTML, CSS & JavaScript</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Built a fully functional Amazon-like e-commerce website using HTML, CSS, and JavaScript. Features include product listing, shopping cart management, real-time price calculation, and interactive user interface.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>Source Code</span>
+                                <i class="fa-brands fa-github text-gray-500 group-hover:text-pink-600 dark:group-hover:text-white text-lg transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Rock Paper Scissors Game - HTML, CSS & JavaScript -->
+                <div class="project-card reveal" data-category="web" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <a href="https://github.com/parisaeb04/rock-scissors-paper.git" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/rps game.png" loading="lazy" alt="Rock Paper Scissors JavaScript Game" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-pink-600 dark:text-pink-400 shadow-sm">Web Development</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">Rock Paper Scissors Game - JavaScript</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">Built an interactive Rock Paper Scissors game using HTML, CSS, and JavaScript. Features include player vs computer gameplay, score tracking, real-time result display</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>Source Code</span>
+                                <i class="fa-brands fa-github text-gray-500 group-hover:text-pink-600 dark:group-hover:text-white text-lg transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card reveal" data-category="hardware" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <a href="https://github.com/SarafatAlamIrfan/Binary-Coded-Decimal-BCD-to-7-Segment-Display-Driver-Circuit" target="_blank" class="block h-full glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden group flex flex-col shadow-lg dark:shadow-none">
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10 dark:bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
+                            <img src="image/bcd.png" loading="lazy" alt="Hardware Prototyping Circuit BCD to 7-Segment Display Driver Logic" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 z-20 bg-white/90 dark:bg-black/60 backdrop-blur-md border border-gray-200 dark:border-white/10 px-3 py-1 rounded-full text-xs font-semibold text-blue-600 dark:text-blue-400 shadow-sm">Hardware</div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow bg-gradient-to-b from-transparent to-white/90 dark:to-black/40">
+                            <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">BCD to 7-Segment Display</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow font-light">An Integrated Circuit (IC) based hardware project driving a 7-segment display using a BCD decoder.</p>
+                            <div class="flex justify-between items-center text-sm font-semibold text-gray-900 dark:text-white">
+                                <span>Source Code</span>
+                                <i class="fa-brands fa-github text-gray-500 group-hover:text-blue-600 dark:group-hover:text-white text-lg transition-colors"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- View More on GitHub CTA -->
+        <div class="mt-16 text-center reveal">
+            <a href="https://github.com/parisaeb04" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 glass-card bg-white/60 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-full text-gray-900 dark:text-white font-semibold hover:bg-gray-100 dark:hover:bg-white/10 transition-all shadow-sm dark:shadow-[0_0_15px_rgba(255,255,255,0.05)] group transform hover:-translate-y-1">
+                <span>Explore More on GitHub</span>
+                <i class="fa-brands fa-github text-xl group-hover:rotate-12 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white reveal">
+                <span class="text-gradient">Experience</span> Roadmap
+            </h2>
+            
+            <div class="max-w-6xl mx-auto relative">
+                <!-- Vertical Line -->
+                <div class="absolute left-6 md:left-1/2 transform md:-translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-brand-light via-pink-500 to-transparent"></div>
+                
+                <div class="space-y-10">
+                    
+                    <!-- 1. IT Internship - Bank Melli Iran (Summer 2025) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-amber-500 dark:group-hover:border-amber-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#f59e0b]"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:text-right pr-0 md:pr-10">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-amber-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">IT Internship <span class="text-amber-500">Network & Infrastructure</span></h3>
+                                <p class="text-amber-600 dark:text-amber-400 font-medium text-sm mb-2">Bank Melli Iran</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">Summer 2025</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Gained hands-on experience with physical network infrastructure, including routers, switches, and cabling. Became familiar with banking network topology, system maintenance, and IT support operations in a real enterprise environment.</p>
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <!-- 2. Teaching Assistant - HCI (April 2025 - Present) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#10b981]"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 pl-0 md:pl-10 text-left">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-emerald-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">Teaching Assistant <span class="text-emerald-500">Human-Computer Interaction</span></h3>
+                                <p class="text-emerald-600 dark:text-emerald-400 font-medium text-sm mb-2">Imam Khomeini International University</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">April 2026 - Present</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Assisted professor in HCI course, helping students with UI/UX design principles and project development. Provided guidance on design thinking, prototyping, and usability testing.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Database Design - Hospital Management (January 2025) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-cyan-500 dark:group-hover:border-cyan-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#06b6d4]"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:text-right pr-0 md:pr-10">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-cyan-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">Database Design <span class="text-cyan-500">Hospital Management</span></h3>
+                                <p class="text-cyan-600 dark:text-cyan-400 font-medium text-sm mb-2">Imam Khomeini International University</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">January 2025</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Designed a relational database for a hospital management system focusing on patient admission and bed management. Created ER diagrams, implemented relational schemas, and wrote SQL queries for data retrieval and reporting. Gained hands-on experience with relational algebra concepts and database normalization.</p>
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <!-- 4. Scientific Association Member (October 2024 - Present) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-indigo-500 dark:group-hover:border-indigo-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#6366f1]"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 pl-0 md:pl-10 text-left">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-indigo-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">Member <span class="text-indigo-500">Computer Engineering Scientific Association</span></h3>
+                                <p class="text-indigo-600 dark:text-indigo-400 font-medium text-sm mb-2">Imam Khomeini International University</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">October 2024 - Present</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Active member of the Computer Engineering Scientific Association, participating in workshops, seminars, and academic events. Contributed to organizing technical sessions and promoting student engagement.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. UI/UX Design & Figma (2024) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-purple-500 dark:group-hover:border-purple-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#a855f7]"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:text-right pr-0 md:pr-10">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-purple-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">UI/UX Design <span class="text-purple-500">Figma</span></h3>
+                                <p class="text-purple-600 dark:text-purple-400 font-medium text-sm mb-2">Self-Learning & Practice</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">2024</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Mastered Figma and UI/UX principles through online courses and personal projects. Designed complete interfaces including a Fitness App, focusing on user flows, wireframing, and prototyping.</p>
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                    <!-- 6. Front-End Web Development (Feb - Sep 2024) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-orange-500 dark:group-hover:border-orange-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#f97316]"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 pl-0 md:pl-10 text-left">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-orange-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">Front-End Web Development</h3>
+                                <p class="text-orange-600 dark:text-orange-400 font-medium text-sm mb-2">Self-Learning & Practice</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">Feb - Sep 2024</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Learned HTML, CSS, and JavaScript to build responsive and interactive websites. Developed multiple projects focusing on modern web design principles and user experience.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Android App Development (October 2023) -->
+                    <div class="relative flex items-center md:justify-between group reveal">
+                        <div class="absolute left-6 md:left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-white dark:bg-gray-900 border-4 border-gray-200 dark:border-black group-hover:border-pink-500 dark:group-hover:border-pink-400 transition-colors z-10 shadow-md dark:shadow-[0_0_10px_#ec4899]"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:text-right pr-0 md:pr-10">
+                            <div class="glass-card bg-white/80 dark:bg-black/40 p-5 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-pink-400/50 transition-colors shadow-sm dark:shadow-none">
+                                <h3 class="text-xl font-display font-bold text-gray-900 dark:text-white mb-1">Android App Development</h3>
+                                <p class="text-pink-600 dark:text-pink-400 font-medium text-sm mb-2">Imam Khomeini International University</p>
+                                <span class="inline-block px-3 py-1 bg-gray-100 dark:bg-white/5 rounded-full text-xs text-gray-600 dark:text-gray-400 mb-2 border border-gray-200 dark:border-white/5">October 2023</span>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Developed a mobile application using Java and Android Studio. Implemented UI design, activity lifecycle, and data persistence.</p>
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-2/12"></div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white reveal">Let's <span class="text-gradient">Connect</span></h2>
+            
+            <div class="max-w-5xl mx-auto grid lg:grid-cols-5 gap-12">
+                <!-- Info -->
+                <div class="lg:col-span-2 reveal">
+                    <h3 class="font-display text-3xl font-bold mb-6 text-gray-900 dark:text-white">Reach Out</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-10 leading-relaxed font-light">
+                        I'm a recent Computer Engineering graduate actively seeking <span class="text-brand-light font-medium">full-time</span> and <span class="text-brand-light font-medium">internship</span> opportunities in <span class="font-medium">software development, web development, or UI/UX design</span>. I'm passionate about building innovative solutions and eager to apply my skills in a professional environment. Whether you have a question, a project idea, or just want to connect — my inbox is always open!
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center group">
+                            <div class="w-12 h-12 rounded-full glass-card border border-gray-200 dark:border-white/10 bg-white/60 dark:bg-transparent flex items-center justify-center text-brand-600 dark:text-brand-light group-hover:bg-brand-600 group-hover:text-white dark:group-hover:bg-brand-light dark:group-hover:text-white transition-all mr-5 shadow-sm dark:shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Email</p>
+                                <p class="text-gray-900 dark:text-white font-medium">parisa.ebrahimian83@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center group">
+                            <div class="w-12 h-12 rounded-full glass-card border border-gray-200 dark:border-white/10 bg-white/60 dark:bg-transparent flex items-center justify-center text-pink-600 dark:text-pink-400 group-hover:bg-pink-600 group-hover:text-white dark:group-hover:bg-pink-400 dark:group-hover:text-white transition-all mr-5 shadow-sm dark:shadow-[0_0_15px_rgba(236,72,153,0.1)]">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Location</p>
+                                <p class="text-gray-900 dark:text-white font-medium">Sanandaj, kordestan, Iran</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="lg:col-span-3 reveal glass-card bg-white/60 dark:bg-black/40 p-8 sm:p-10 rounded-3xl border border-gray-200 dark:border-white/10 relative overflow-hidden shadow-lg dark:shadow-none">
+                    <!-- Glow effect behind form -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-light opacity-20 dark:opacity-10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+                    
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <input type="text" name="name" placeholder="Name" class="w-full px-5 py-4 bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-brand-light focus:ring-1 focus:ring-brand-light transition-all shadow-sm dark:shadow-none" required>
+                            </div>
+                            <div>
+                                <input type="email" name="email" placeholder="Email" class="w-full px-5 py-4 bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-brand-light focus:ring-1 focus:ring-brand-light transition-all shadow-sm dark:shadow-none" required>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" name="subject" placeholder="Subject" class="w-full px-5 py-4 bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-brand-light focus:ring-1 focus:ring-brand-light transition-all shadow-sm dark:shadow-none" required>
+                        </div>
+                        <div>
+                            <textarea name="message" placeholder="Your Message" rows="5" class="w-full px-5 py-4 bg-white/80 dark:bg-black/40 border border-gray-200 dark:border-white/10 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-brand-light focus:ring-1 focus:ring-brand-light transition-all resize-none shadow-sm dark:shadow-none" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gray-900 text-white dark:bg-white dark:text-black font-bold py-4 rounded-xl hover:bg-brand-600 dark:hover:bg-gray-200 transition-all transform hover:scale-[1.02] shadow-md dark:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                            Send Message
+                        </button>
+                    </form>
+                    <div id="form-message" class="mt-4 text-sm hidden font-medium text-center rounded-xl py-3 border"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="border-t border-gray-200 dark:border-white/10 bg-white/80 dark:bg-black/50 backdrop-blur-lg py-12 relative z-10 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-xl font-bold text-gray-900 dark:text-white mb-6 tracking-widest uppercase">Parisa Ebrahemian</h2>
+            
+            <!-- Restored ALL 5 Social Links for Footer -->
+            <div class="flex justify-center space-x-4 sm:space-x-6 mb-8">
+                <a href="https://github.com/parisaeb04" target="_blank" class="w-10 h-10 rounded-full glass-card bg-white/60 dark:bg-transparent border border-gray-200 dark:border-transparent flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-white/30 transition-all"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank" class="w-10 h-10 rounded-full glass-card bg-white/60 dark:bg-transparent border border-gray-200 dark:border-transparent flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-[#0a66c2] hover:border-[#0a66c2] dark:hover:text-[#0a66c2] dark:hover:border-white/30 transition-all"><i class="fab fa-linkedin"></i></a>
+                <a href="https://x.com/parparisa9404" target="_blank" class="w-10 h-10 rounded-full glass-card bg-white/60 dark:bg-transparent border border-gray-200 dark:border-transparent flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:border-gray-400 dark:hover:text-white dark:hover:border-white/30 transition-all"><i class="fa-brands fa-x"></i></a>
+                <a href="https://www.instagram.com/_parisa._.eb/" target="_blank" class="w-10 h-10 rounded-full glass-card bg-white/60 dark:bg-transparent border border-gray-200 dark:border-transparent flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-[#e1306c] hover:border-[#e1306c] dark:hover:text-[#e1306c] dark:hover:border-white/30 transition-all"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <p class="text-sm text-gray-500 font-light">&copy; 2026. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- ====== JAVASCRIPT ====== -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* ========================================
+   COMPONENTS.CSS - UI Components
+   ======================================== */
+
+/* ----- Typing Container ----- */
+.typing-container {
+    display: inline-block;
+    position: relative;
+}
+
+.typing-container::after {
+    content: '|';
+    position: absolute;
+    right: -8px;
+    animation: blink 1s step-end infinite;
+    color: #a855f7;
+}
+
+/* ----- Skill Cards (Hover Effects) ----- */
+.skill-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.skill-card:hover {
+    transform: translateY(-2px);
+}
+
+/* ----- Project Cards ----- */
+.project-card {
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+}
+
+/* ----- Filter Buttons ----- */
+.filter-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-btn.active {
+    background: #1a1a1a;
+    color: white;
+}
+
+.dark .filter-btn.active {
+    background: white;
+    color: black;
+}
+
+/* ----- Form Inputs ----- */
+.form-input {
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+}
+
+/* ----- Footer Social Icons ----- */
+.social-icon {
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}
