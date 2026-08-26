@@ -60,29 +60,6 @@
 - **Icons:** FontAwesome
 - **3D Interactions:** Vanilla Tilt.js
 
-## 📁 Project Structure
-
-my-designer-portfolio/
-├── index.html
-├── css/
-│ ├── style.css
-│ ├── components.css
-│ └── animations.css
-├── js/
-│ └── main.js
-├── image/
-│ ├── LinkedIn_HeadShot.png
-│ ├── Portfolio_cover.jpg
-│ ├── 01.jpg
-│ ├── 02.png
-│ ├── 03.png
-│ ├── music_player.png
-│ ├── Screenshot_20260810_100148_Pinterest.jpg
-│ ├── Screenshot_20260810_100215_Pinterest.jpg
-│ ├── Screenshot (1223).png
-│ └── calculator.png
-└── README.md
-
 ## 💻 Local Development
 
 To run this project locally on your machine:
@@ -133,6 +110,3 @@ To run this project locally on your machine:
 
 ## 📄 License
     This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-## Designed and built by Md Sarafat Alam Mozumder.
