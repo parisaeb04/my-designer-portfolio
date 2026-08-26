@@ -55,7 +55,7 @@ function typeWriter() {
     if (charIndex < textToType.length) {
         typewriterElement.innerHTML += textToType.charAt(charIndex);
         charIndex++;
-        setTimeout(typeWriter, 100);
+        setTimeout(typeWriter, 200);
     }
 }
 setTimeout(typeWriter, 500);
@@ -156,7 +156,7 @@ contactForm.addEventListener('submit', async (e) => {
     submitBtn.style.opacity = '0.7';
 
     try {
-        const response = await fetch("YOUR_ENDPOINT_HERE", {
+        const response = await fetch("https://formspree.io/f/moeqavzg", {
             method: "POST",
             body: formData,
             headers: { 'Accept': 'application/json' }

@@ -28,11 +28,12 @@
 
 /* ----- Project Cards ----- */
 .project-card {
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 /* ----- Filter Buttons ----- */
@@ -55,19 +56,31 @@
 /* ----- Form Inputs ----- */
 .form-input {
     transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
 }
 
 .form-input:focus {
     outline: none;
     border-color: #a78bfa;
-    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+    box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.15), 0 4px 20px rgba(167, 139, 250, 0.1);
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.dark .form-input:focus {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* ----- Footer Social Icons ----- */
 .social-icon {
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .social-icon:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
